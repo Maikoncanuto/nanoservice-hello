@@ -1,0 +1,23 @@
+service: hello-function
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+functions:
+  hello:
+    handler: src/api/hello-function.handler
+    memorySize: 128
+    provisionedConcurrency: 1
+    events:
+      - httpApi:
+          method: GET
+          path: /
+
